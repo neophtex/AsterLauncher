@@ -1,4 +1,4 @@
-![Presentation](https://github.com/neophtex/AsterLauncher/assets/94605343/f9d373cf-6372-4b79-8c93-a2e8ec9b7672)
+![Presentation](https://github.com/neophtex/AsterLauncher/assets/94605343/09d35861-244b-470f-8759-1b966bd161f6)
 ------------
 **About**
 ------------

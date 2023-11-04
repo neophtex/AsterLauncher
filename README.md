@@ -4,6 +4,9 @@
 ------------
 **Aster Launcher - the minimalist productivity launcher for focus, productivity, keep your focus on what really counts.**
 ------------
+[<img src="https://img.shields.io/github/v/release/neophtex/AsterLauncher.svg?logo=github&label=GitHub"
+      alt="GitHub Releases"
+      height="22"/>](https://github.com/neophtex/AsterLauncher/releases)
 [<img src="https://img.shields.io/f-droid/v/com.series.aster.launcher?logo=f-droid&label=F-Droid"
       alt="F-Droid Releases"
       height="22"/>](https://f-droid.org/en/packages/com.series.aster.launcher/)

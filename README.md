@@ -23,6 +23,6 @@
 
 - **Hide Apps: Easily conceal apps that you don't want to be visible, keeping your home screen clean and focused on the content you need.**
 
-- **App Locking: Secure your privacy and data by setting passwords to lock selected apps.**
+- **App Locking: Secure your privacy and data by fingerprint to lock selected apps.**
 
 - **Personalized Customization: Choose the font color and position for time, date, and favorite apps, making your home screen truly reflect your style.**

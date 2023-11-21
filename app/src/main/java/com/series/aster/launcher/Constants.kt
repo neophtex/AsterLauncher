@@ -18,6 +18,10 @@ object Constants {
     const val DAILY_WORD_COLOR = "DAILY_WORD_COLOR"
     const val APP_COLOR = "APP_COLOR"
 
+    const val DATE_TEXT_SIZE = "DATE_TEXT_SIZE"
+    const val TIME_TEXT_SIZE = "TIME_TEXT_SIZE"
+    const val APP_TEXT_SIZE = "APP_TEXT_SIZE"
+
     const val SHOW_APP_ICON = "SHOW_APP_ICON"
 
     const val AUTOMATIC_KEYBOARD = "AUTOMATIC_KEYBOARD"
@@ -34,5 +38,5 @@ object Constants {
     const val NOTIFICATION_MANAGER = "android.app.StatusBarManager"
     const val NOTIFICATION_METHOD = "expandNotificationsPanel"
 
-    const val REQUEST_CODE_ENABLE_ADMIN = 666
+    const val REQUEST_CODE_ENABLE_ADMIN = 123
 }

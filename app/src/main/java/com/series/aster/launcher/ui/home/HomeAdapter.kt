@@ -16,8 +16,6 @@ class HomeAdapter @Inject constructor(private val onAppClickedListener: OnItemCl
 ) :
     ListAdapter<AppInfo,RecyclerView.ViewHolder>(DiffCallback()) {
 
-    private val data: MutableList<AppInfo> = mutableListOf()
-
     override fun onCreateViewHolder(
         parent: android.view.ViewGroup,
         viewType: Int

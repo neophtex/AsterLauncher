@@ -5,166 +5,171 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/bottom_sheet0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         tools:ignore="MissingConstraints">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             android:orientation="horizontal"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/bottom_sheet_rename"
+                style="@style/TextDefaultStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@android:color/white"
                 android:background="@android:color/transparent"
-                android:textSize="@dimen/bottom_dialog_text_large"
-                android:text="@string/bottom_dialog_app_rename">
-            </androidx.appcompat.widget.AppCompatEditText>
+                android:text="@string/bottom_dialog_app_rename"
+                android:textSize="@dimen/bottom_dialog_text_large"></androidx.appcompat.widget.AppCompatEditText>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/bottom_sheet_rename_done"
+                style="@style/TextDefaultStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:gravity="center"
-                android:textSize="@dimen/bottom_dialog_text_small"
-                android:text="Save"/>
+                android:text="Save"
+                android:textSize="@dimen/bottom_dialog_text_small" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-        <LinearLayout
-
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             android:orientation="horizontal"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/bottom_sheet_fav_hidden"
+                style="@style/TextDefaultStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/bottom_dialog_text_large"
-                android:text="@string/bottom_dialog_remove_from_home">
+                android:text="@string/bottom_dialog_remove_from_home"
+                android:textSize="@dimen/bottom_dialog_text_large">
 
             </androidx.appcompat.widget.AppCompatTextView>
 
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             android:orientation="horizontal"
-            tools:ignore="MissingConstraints"
-            android:visibility="gone">
+            android:visibility="gone"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/bottom_sheet_order"
+                style="@style/TextDefaultStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/bottom_dialog_text_large"
-                android:text="@string/bottom_dialog_order_home_apps">
+                android:text="@string/bottom_dialog_order_home_apps"
+                android:textSize="@dimen/bottom_dialog_text_large">
 
             </androidx.appcompat.widget.AppCompatTextView>
 
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             android:orientation="horizontal"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/bottom_sheet_hidden"
+                style="@style/TextDefaultStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/bottom_dialog_text_large"
-                android:text="@string/bottom_dialog_add_to_hidden">
+                android:text="@string/bottom_dialog_add_to_hidden"
+                android:textSize="@dimen/bottom_dialog_text_large">
 
             </androidx.appcompat.widget.AppCompatTextView>
 
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             android:orientation="horizontal"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/bottom_sheet_lock"
+                style="@style/TextDefaultStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/bottom_dialog_text_large"
-                android:text="@string/bottom_dialog_add_to_lock">
+                android:text="@string/bottom_dialog_add_to_lock"
+                android:textSize="@dimen/bottom_dialog_text_large">
 
             </androidx.appcompat.widget.AppCompatTextView>
 
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             android:orientation="horizontal"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/bottom_sheet_uninstall"
+                style="@style/TextDefaultStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/bottom_dialog_text_large"
-                android:text="@string/bottom_dialog_app_uninstall">
+                android:text="@string/bottom_dialog_app_uninstall"
+                android:textSize="@dimen/bottom_dialog_text_large">
 
             </androidx.appcompat.widget.AppCompatTextView>
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/bottom_sheet4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             android:orientation="horizontal"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/bottom_sheet_info"
+                style="@style/TextDefaultStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/bottom_dialog_text_large"
-                android:text="@string/bottom_dialog_app_info">
+                android:text="@string/bottom_dialog_app_info"
+                android:textSize="@dimen/bottom_dialog_text_large">
 
             </androidx.appcompat.widget.AppCompatTextView>
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

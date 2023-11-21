@@ -12,8 +12,6 @@ class DrawAdapter(private val onAppClickedListener: OnItemClickedListener.OnApps
                   private val onAppLongClickedListener: OnItemClickedListener.OnAppLongClickedListener) :
     ListAdapter<AppInfo, RecyclerView.ViewHolder>(DiffCallback()) {
 
-    private val data: MutableList<AppInfo> = mutableListOf()
-
     override fun onCreateViewHolder(
         parent: android.view.ViewGroup,
         viewType: Int

@@ -24,7 +24,7 @@
         android:requiresFadingEdge="vertical"
         android:scrollbars="none">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/mainView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,19 +32,20 @@
             android:layout_marginVertical="32dp"
             android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:orientation="vertical">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/battery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:text="Battery"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    style="@style/TextDefaultStyle"/>
 
                 <TextClock
                     android:id="@+id/clock"
@@ -54,9 +55,9 @@
                     android:layout_marginVertical="16dp"
                     android:fontFamily="sans-serif-light"
                     android:format12Hour="h:mm"
-                    android:textColor="@android:color/white"
                     android:textSize="48sp"
-                    tools:text="02:34" />
+                    tools:text="02:34"
+                    style="@style/TextDefaultStyle"/>
 
                 <TextClock
                     android:id="@+id/date"
@@ -69,7 +70,8 @@
                     android:gravity="start"
                     android:paddingHorizontal="2dp"
                     android:textSize="32sp"
-                    tools:text="Thu, 30 Dec" />
+                    tools:text="Thu, 30 Dec"
+                    style="@style/TextDefaultStyle"/>
 
                 <!--TextView
                     android:id="@+id/word"
@@ -81,15 +83,15 @@
                     android:visibility="gone"
                     android:layout_marginBottom="42dp" /-->
 
-            </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/appListAdapter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp" />
+                 />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </com.series.aster.launcher.view.GestureNestedScrollView>
 

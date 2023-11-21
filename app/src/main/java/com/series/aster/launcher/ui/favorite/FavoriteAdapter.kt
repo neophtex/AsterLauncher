@@ -14,7 +14,6 @@ class FavoriteAdapter(private val onAppClickedListener: OnItemClickedListener.On
 ) : ListAdapter<AppInfo, RecyclerView.ViewHolder>(DiffCallback()) ,OnItemMoveListener.OnItemActionListener{
 
     private lateinit var touchHelper: ItemTouchHelper
-    private var apps: MutableList<AppInfo> = mutableListOf()
 
     override fun onCreateViewHolder(
         parent: android.view.ViewGroup,

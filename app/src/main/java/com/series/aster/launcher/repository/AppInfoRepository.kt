@@ -10,6 +10,7 @@ import com.series.aster.launcher.data.dao.AppInfoDAO
 import com.series.aster.launcher.data.entities.AppInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -153,23 +154,22 @@ class AppInfoRepository @Inject constructor(
 
         val newApps = mutableListOf<AppInfo>()
 
-        // 比较应用程序并进行相应的操作
+        // compare application
         for (app in allApps) {
             val packageName = app.packageName
             if (!installedPackages.contains(packageName)) {
-                // 应用程序已卸载
+                // application uninstall
                 appDao.delete(app)
                 uninstalledApps.add(app)
             }
         }
 
-        // 查询新增的应用程序
+        // query new application
         val newPackageNames = installedPackages.filterNot { packageName ->
             allApps.any { app -> app.packageName == packageName }
         }
 
         for (packageName in newPackageNames) {
-            // 创建新的AppInfo对象的逻辑
             val app = appDao.getAppByPackageName(packageName)
             app?.let {
                 newApps.add(app)

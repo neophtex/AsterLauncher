@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appFavorite_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -22,16 +22,17 @@
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="RtlHardcoded"
+            style="@style/TextDefaultStyle"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appFavorite_drag_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="16dp"
-            android:background="@drawable/icon_home_drag" />
+            android:background="@drawable/icon_favorite_order" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

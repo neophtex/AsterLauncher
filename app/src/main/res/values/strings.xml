@@ -22,13 +22,13 @@
     <string name="settings_name">Launcher Settings</string>
     <string name="settings_home">Home</string>
 
-    <string name="settings_title_home_display_preferences">Display Preferences</string>
-    <string name="settings_title_home_style">Home Style</string>
+    <string name="settings_title_home_display_preferences">Display</string>
+    <string name="settings_title_home_appearance_preferences">Appearance</string>
     <string name="settings_title_date_style">Date Style</string>
     <string name="settings_title_time_style">Time Style</string>
     <string name="settings_title_app_manager">App Manage</string>
     <string name="settings_title_gestures">Gestures</string>
-    <string name="settings_title_more">More</string>
+    <string name="settings_title_others">Others</string>
 
     <string name="settings_appearance_statue_bar">Show Statue Bar</string>
     <string name="settings_appearance_date">Show Date</string>
@@ -38,11 +38,27 @@
 
     <string name="settings_appearance_daily_word_default">Keep Going</string>
 
+    <string name="settings_appearance_color_title">Color</string>
+    <string name="settings_appearance_text_size_title">Size</string>
+    <string name="settings_appearance_alignment_title">Alignment</string>
+
     <string name="settings_appearance_date_color">Select Date Color</string>
     <string name="settings_appearance_time_color">Select Time Color</string>
     <string name="settings_appearance_battery_color">Select Battery Color</string>
     <string name="settings_appearance_daily_word_color">Select Daily Word Color</string>
     <string name="settings_appearance_app_display_color">Select App Color</string>
+    <string name="settings_appearance_date_size_title">Date Size : </string>
+    <string name="settings_appearance_time_size_title">Time Size : </string>
+    <string name="settings_appearance_app_size_title">App Size : </string>
+
+    <string name="appearance_bottom_dialog_text_size_title">Size</string>
+    <string name="appearance_bottom_dialog_text_color_title">Color</string>
+    <string name="appearance_bottom_dialog_alignment_title">Alignment</string>
+    <string name="appearance_bottom_dialog_desc_date">Date\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_time">Time\u0020:\u0020 </string>
+    <string name="appearance_bottom_dialog_desc_app">App\u0020:\u0020</string>
+    <string name="appearance_bottom_dialog_desc_battery">Battery\u0020:\u0020 </string>
+
     <string name="settings_appearance_wallpaper">Custom Wallpaper</string>
 
     <string name="settings_appearance_home_date_alignment">Date Alignment</string>
@@ -54,6 +70,11 @@
     <string name="settings_manager_hidden">Hidden Apps</string>
 
     <string name="settings_double_tap_lock">Double tap to lock</string>
+
+    <string name="settings_others_rate">Rate</string>
+    <string name="settings_others_share">Share</string>
+    <string name="settings_others_feedback">Feedback</string>
+    <string name="settings_others_github">Github</string>
 
     <string name="authentication_title">Authentication</string>
     <string name="authentication_subtitle">Please login to get access</string>

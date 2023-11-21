@@ -13,19 +13,28 @@ class PreferenceViewModel @Inject constructor(
 
     val firstLaunchLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showStatusBarLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
     val showTimeLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showDateLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showDailyWordLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showBatteryLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
     val homeAppAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
     val homeDateAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
     val homeTimeAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
     val homeDailyWordAlignmentLiveData: MutableLiveData<Int> = MutableLiveData()
+
     val dateColorLiveData: MutableLiveData<Int> = MutableLiveData()
     val timeColorLiveData: MutableLiveData<Int> = MutableLiveData()
     val batteryColorLiveData: MutableLiveData<Int> = MutableLiveData()
     val dailyWordColorLiveData: MutableLiveData<Int> = MutableLiveData()
     val appColorLiveData: MutableLiveData<Int> = MutableLiveData()
+
+    val dateTextSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    val timeTextSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+    val appTextSizeLiveData: MutableLiveData<Float> = MutableLiveData()
+
+
     val tapLockScreenLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     fun setFirstLaunch(firstLaunch: Boolean) {
@@ -98,9 +107,19 @@ class PreferenceViewModel @Inject constructor(
         homeTimeAlignmentLiveData.postValue(preferenceHelper.homeTimeAlignment)
     }
 
-    fun setHomeDailyWordAlignment(dailyWordAlignment: Int){
-        preferenceHelper.homeDailyWordAlignment = dailyWordAlignment
-        homeDailyWordAlignmentLiveData.postValue(preferenceHelper.homeDailyWordAlignment)
+    fun setDateTextSize(dateTextSize: Float) {
+        preferenceHelper.dateTextSize = dateTextSize
+        dateTextSizeLiveData.postValue(preferenceHelper.dateTextSize)
+    }
+
+    fun setTimeTextSize(timeTextSize: Float) {
+        preferenceHelper.timeTextSize = timeTextSize
+        timeTextSizeLiveData.postValue(preferenceHelper.timeTextSize)
+    }
+
+    fun setAppTextSize(appTextSize: Float) {
+        preferenceHelper.appTextSize = appTextSize
+        appTextSizeLiveData.postValue(preferenceHelper.appTextSize)
     }
 
     fun setDoubleTapLock(tapLockScreen: Boolean){

@@ -1,6 +1,7 @@
 package com.series.aster.launcher.ui.drawer
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
@@ -20,7 +22,7 @@ import com.series.aster.launcher.databinding.FragmentDrawBinding
 import com.series.aster.launcher.helper.AppHelper
 import com.series.aster.launcher.helper.FingerprintHelper
 import com.series.aster.launcher.listener.OnItemClickedListener
-import com.series.aster.launcher.ui.bottomsheetdialog.BottomSheetFragment
+import com.series.aster.launcher.ui.bottomsheetdialog.AppInfoBottomSheetFragment
 import com.series.aster.launcher.viewmodel.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -53,34 +55,36 @@ class DrawFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     lateinit var fingerHelper: FingerprintHelper
 
     private lateinit var context: Context
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentDrawBinding.inflate(inflater, container, false)
-
         return binding.root
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // Set according to the system theme mode
+        appHelper.dayNightMod(requireContext(), binding.drawBackground)
         super.onViewCreated(view, savedInstanceState)
 
         context = requireContext()
 
         setupRecyclerView()
         setupSearch()
+        observeClickListener()
     }
 
-    private fun setupRecyclerView() {
 
+    private fun setupRecyclerView() {
         binding.drawAdapter.apply {
             adapter = drawAdapter
             layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
             setHasFixedSize(false)
-            //itemAnimator = null
-            //scrollToPosition(0)
         }
     }
 
@@ -95,6 +99,11 @@ class DrawFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
             }
         }
     }
+
+    private fun observeClickListener(){
+        binding.drawSearchButton.setOnClickListener {appHelper.showSoftKeyboard(context, binding.searchView1)}
+    }
+
 
     private fun setupSearch() {
         binding.searchView1.addTextChangedListener(object: TextWatcher {
@@ -113,10 +122,8 @@ class DrawFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     }
 
     private fun searchApp(query: String?) {
-
         val searchQuery = "%$query%"
         viewLifecycleOwner.lifecycle.coroutineScope.launchWhenCreated {
-            //viewModel.compareInstalledApps()
             viewModel.searchAppInfo(searchQuery).collect { drawAdapter.submitList(it) }
         }
     }
@@ -124,7 +131,7 @@ class DrawFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     private fun showSelectedApp(appInfo: AppInfo) {
         binding.searchView1.text?.clear()
 
-        val bottomSheetFragment = BottomSheetFragment(appInfo)
+        val bottomSheetFragment = AppInfoBottomSheetFragment(appInfo)
         bottomSheetFragment.setOnBottomSheetDismissedListener(this)
         bottomSheetFragment.setOnAppStateClickListener(this)
         bottomSheetFragment.show(parentFragmentManager, "BottomSheetDialog")
@@ -138,12 +145,18 @@ class DrawFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     override fun onPause() {
         super.onPause()
         binding.searchView1.text?.clear()
+        appHelper.hideKeyboard(context, binding.searchView1)
     }
 
     override fun onResume() {
         super.onResume()
         observeDrawerApps()
         binding.drawAdapter.scrollToPosition(0)
+    }
+
+    override fun onStop() {
+        super.onStop()
+
     }
 
     override fun onAppClicked(appInfo: AppInfo) {
@@ -170,8 +183,6 @@ class DrawFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
         }
     }
 
-    // 调用指纹认证
-    // 实现 FingerHelper.Callback 接口的方法
     override fun onAuthenticationSucceeded(appInfo: AppInfo) {
         Toast.makeText(context, getString(R.string.authentication_succeeded), Toast.LENGTH_SHORT)
             .show()
@@ -181,33 +192,11 @@ class DrawFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     override fun onAuthenticationFailed() {
         Toast.makeText(context, getString(R.string.authentication_failed), Toast.LENGTH_SHORT)
             .show()
-        // 可以执行其他操作
     }
 
     override fun onAuthenticationError(errorCode: Int, errorMessage: CharSequence?) {
         Toast.makeText(context, getString(R.string.authentication_error), Toast.LENGTH_SHORT)
             .show()
-        // 可以执行其他操作
     }
-
-    /*override fun onAuthenticationSucceeded(appInfo: AppInfo) {
-        Toast.makeText(context, getString(R.string.authentication_succeeded), Toast.LENGTH_SHORT).show()
-        startActivityForApp(appInfo)
-    }
-
-    override fun onAuthenticationFailed() {
-        Toast.makeText(context, getString(R.string.authentication_failed), Toast.LENGTH_SHORT).show()
-        // 可以执行其他操作
-    }
-
-    override fun onAuthenticationError(errorCode: Int, errorMessage: CharSequence?) {
-        Toast.makeText(context, getString(R.string.authentication_error), Toast.LENGTH_SHORT).show()
-        // 可以执行其他操作
-    }
-
-    override fun startActivityForApp(appInfo: AppInfo) {
-        utils.launchApp(context, appInfo)
-    }*/
-
 }
 

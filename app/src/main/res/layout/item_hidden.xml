@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appHidden_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -22,8 +22,9 @@
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="RtlHardcoded"
+            style="@style/TextDefaultStyle"/>
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

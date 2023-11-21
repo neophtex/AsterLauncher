@@ -1,8 +1,11 @@
 package com.series.aster.launcher.ui.activities
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.WindowInsetsController
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity

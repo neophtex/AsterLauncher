@@ -24,7 +24,7 @@ import com.series.aster.launcher.helper.FingerprintHelper
 import com.series.aster.launcher.helper.PreferenceHelper
 import com.series.aster.launcher.listener.OnItemClickedListener
 import com.series.aster.launcher.listener.OnItemMoveListener
-import com.series.aster.launcher.ui.bottomsheetdialog.BottomSheetFragment
+import com.series.aster.launcher.ui.bottomsheetdialog.AppInfoBottomSheetFragment
 import com.series.aster.launcher.viewmodel.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -42,7 +42,7 @@ import javax.inject.Inject
 class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     OnItemClickedListener.BottomSheetDismissListener,
     OnItemClickedListener.OnAppStateClickListener,
-    FingerprintHelper.Callback,OnItemMoveListener.OnItemActionListener{
+    FingerprintHelper.Callback, OnItemMoveListener.OnItemActionListener {
     private var _binding: FragmentFavoriteBinding? = null
 
     // This property is only valid between onCreateView and
@@ -62,7 +62,7 @@ class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener
     @Inject
     lateinit var appHelper: AppHelper
 
-    private val favoriteAdapter: FavoriteAdapter by lazy {FavoriteAdapter(this) }
+    private val favoriteAdapter: FavoriteAdapter by lazy { FavoriteAdapter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,6 +77,7 @@ class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        appHelper.dayNightMod(requireContext(), binding.favoriteView)
         super.onViewCreated(view, savedInstanceState)
 
         context = requireContext()
@@ -99,22 +100,20 @@ class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener
         val items = favoriteAdapter.currentList.toMutableList()
         Collections.swap(items, oldPosition, newPosition)
 
-        // 更新 app_order 值
+        // update app_order value
         items.forEachIndexed { index, appInfo ->
             appInfo.appOrder = index
         }
 
-        // 在 IO 线程中保存更新后的收藏应用列表到数据库
+        // Save the updated list of favorite applications to the database on the IO thread
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.updateAppOrder(items)
         }
 
-        //favoriteAdapter.submitList(items)
-
     }
 
 
-    private fun observeHomeAppOrder(){
+    private fun observeHomeAppOrder() {
         //binding.favoriteAdapter.adapter = favoriteAdapter
         val listener: OnItemMoveListener.OnItemActionListener = favoriteAdapter
 
@@ -130,7 +129,8 @@ class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener
                 } else {
                     viewHolder.itemView.alpha = 1f
                 }
-                super.onChildDraw(canvas, recyclerView, viewHolder,
+                super.onChildDraw(
+                    canvas, recyclerView, viewHolder,
                     dX, dY,
                     actionState, isCurrentlyActive
                 )
@@ -141,7 +141,6 @@ class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener
                 viewHolder: RecyclerView.ViewHolder
             ) {
                 super.clearView(recyclerView, viewHolder)
-                //listener.onViewIdle()
             }
 
             override fun getMovementFlags(
@@ -161,16 +160,12 @@ class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener
                 val oldPosition = viewHolder.bindingAdapterPosition
                 val newPosition = target.bindingAdapterPosition
 
-                //val items = favoriteAdapter.currentList.toMutableList()
-                //Collections.swap(items, oldPosition, newPosition)
-                //favoriteAdapter.submitList(items)
-
-                //handleDragAndDrop(oldPosition, newPosition)
-
                 handleDragAndDrop(oldPosition, newPosition)
-                //viewModel.updateAppOrder(items)
 
-                return listener.onViewMoved(viewHolder.bindingAdapterPosition, target.bindingAdapterPosition)
+                return listener.onViewMoved(
+                    viewHolder.bindingAdapterPosition,
+                    target.bindingAdapterPosition
+                )
 
             }
 
@@ -190,10 +185,10 @@ class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener
     private fun observeFavorite() {
         viewModel.compareInstalledAppInfo()
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.favoriteApps.collect { it
-                    // 处理收集到的数据
-                    favoriteAdapter.submitList(it)
-                }
+            viewModel.favoriteApps.collect {
+                it
+                favoriteAdapter.submitList(it)
+            }
         }
     }
 
@@ -201,17 +196,18 @@ class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener
         if (!appInfo.lock) {
             appHelper.launchApp(context, appInfo)
         } else {
-            fingerHelper.startFingerprintAuth(appInfo,this)
+            fingerHelper.startFingerprintAuth(appInfo, this)
         }
     }
 
     private fun showSelectedApp(appInfo: AppInfo) {
-        val bottomSheetFragment = BottomSheetFragment(appInfo)
+        val bottomSheetFragment = AppInfoBottomSheetFragment(appInfo)
         bottomSheetFragment.setOnBottomSheetDismissedListener(this)
         bottomSheetFragment.setOnAppStateClickListener(this)
         bottomSheetFragment.show(parentFragmentManager, "BottomSheetDialog")
 
     }
+
     override fun onResume() {
         super.onResume()
     }
@@ -241,13 +237,11 @@ class FavoriteFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener
     override fun onAuthenticationFailed() {
         Toast.makeText(context, getString(R.string.authentication_failed), Toast.LENGTH_SHORT)
             .show()
-        // 可以执行其他操作
     }
 
     override fun onAuthenticationError(errorCode: Int, errorMessage: CharSequence?) {
         Toast.makeText(context, getString(R.string.authentication_error), Toast.LENGTH_SHORT)
             .show()
-        // 可以执行其他操作
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {

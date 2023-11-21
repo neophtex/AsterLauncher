@@ -1,7 +1,5 @@
 package com.series.aster.launcher.ui.bottomsheetdialog
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -18,6 +16,7 @@ import com.series.aster.launcher.R
 import com.series.aster.launcher.data.entities.AppInfo
 import com.series.aster.launcher.databinding.BottomsheetDialogBinding
 import com.series.aster.launcher.helper.AppHelper
+import com.series.aster.launcher.helper.BottomDialogHelper
 import com.series.aster.launcher.helper.FingerprintHelper
 import com.series.aster.launcher.listener.OnItemClickedListener
 import com.series.aster.launcher.viewmodel.AppViewModel
@@ -25,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class BottomSheetFragment(private val appInfo: AppInfo) : BottomSheetDialogFragment(),
+class AppInfoBottomSheetFragment(private val appInfo: AppInfo) : BottomSheetDialogFragment(),
     FingerprintHelper.Callback {
 
     private var _binding: BottomsheetDialogBinding? = null
@@ -36,6 +35,9 @@ class BottomSheetFragment(private val appInfo: AppInfo) : BottomSheetDialogFragm
 
     @Inject
     lateinit var appHelper: AppHelper
+
+    @Inject
+    lateinit var bottomDialogHelper: BottomDialogHelper
 
     @Inject
     lateinit var fingerHelper: FingerprintHelper
@@ -64,17 +66,12 @@ class BottomSheetFragment(private val appInfo: AppInfo) : BottomSheetDialogFragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupDialogStyle(view)
-        setupView()
+        initView()
         observeClickListener()
     }
 
-    private fun setupDialogStyle(view: View) {
-        val bottomSheet = view.parent as View
-        bottomSheet.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#70000000"))
-    }
-
-    private fun setupView() {
+    private fun initView() {
+        bottomDialogHelper.setupDialogStyle(dialog)
 
         binding.run {
             bottomSheetFavHidden.text = getString(if (!appInfo.favorite) R.string.bottom_dialog_add_to_home else R.string.bottom_dialog_remove_from_home)
@@ -88,8 +85,6 @@ class BottomSheetFragment(private val appInfo: AppInfo) : BottomSheetDialogFragm
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun observeClickListener() {
-        val packageName = appInfo.packageName // 要解安裝的應用程式的套件名稱
-
         val packageManager = context?.packageManager
         val applicationInfo = packageManager?.getApplicationInfo(appInfo.packageName, 0)
         val appName = applicationInfo?.let { packageManager?.getApplicationLabel(it).toString() }
@@ -110,24 +105,23 @@ class BottomSheetFragment(private val appInfo: AppInfo) : BottomSheetDialogFragm
         binding.bottomSheetRename.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // 文本變化之前的操作
+                // Operations before text changes
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // 文本變化時的操作
-                appInfo.appName = s.toString()// 立即更新應用程序名稱
+                // Operations when text changes
+                appInfo.appName = s.toString()
 
-                if(s.isNullOrEmpty()){
+                if (s.isNullOrEmpty()) {
                     viewModel.updateAppInfoAppName(appInfo, appName.toString())
-                }else{
+                } else {
                     viewModel.updateAppInfoAppName(appInfo, s.toString())
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {
-                // 文本變化之後的操作
+                // Operations after text changes
                 if (s.isNullOrEmpty()) {
-                    binding.bottomSheetRename.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.bottomSheetRename.hint = appName
                     appInfo.appName = appName ?: ""
                 } else {
@@ -155,8 +149,7 @@ class BottomSheetFragment(private val appInfo: AppInfo) : BottomSheetDialogFragm
         binding.bottomSheetLock.setOnClickListener {
             if (appInfo.lock) {
                 fingerHelper.startFingerprintAuth(appInfo, this)
-            }
-            else {
+            } else {
                 appInfo.lock = true
                 viewModel.updateAppLock(appInfo, appInfo.lock)
                 dismiss()

@@ -2,8 +2,10 @@ package com.series.aster.launcher.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ViewConfiguration
+import androidx.core.view.GestureDetectorCompat
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 import com.series.aster.launcher.listener.ScrollEventListener
@@ -40,7 +42,7 @@ class GestureNestedScrollView(context: Context, attrs: AttributeSet) : NestedScr
                 isBottomReached = !canScrollVertically(1)
                 isScrollingUp = deltaY < 0 && isTopReached
 
-                // 判断是否再次上拉或下拉触发事件
+                // Determine whether to trigger the event again by pulling up or pulling down.
                 val distanceY = ev.y - startTouchY
                 val threshold = ViewConfiguration.get(context).scaledTouchSlop.toFloat()
                 isPullingDown = distanceY > threshold && isTopReached
@@ -65,20 +67,20 @@ class GestureNestedScrollView(context: Context, attrs: AttributeSet) : NestedScr
                 isBottomReached = !canScrollVertically(1)
                 isScrollingUp = deltaY < 0 && isTopReached
 
-                // 判断是否再次上拉或下拉触发事件
+                // Determine whether to trigger the event again by pulling up or pulling down.
                 val distanceY = ev.y - startTouchY
                 val threshold = 200
                 isPullingDown = distanceY > threshold && isTopReached
                 isPullingUp = distanceY < -threshold && isBottomReached
             }
             MotionEvent.ACTION_UP -> {
-                startY = 0f // 重置startY的值
+                startY = 0f // Reset the value of startY
                 if (isPullingDown) {
-                    // 再次下拉事件
+                    // Pull-down event again
                     scrollEventListener?.onTopReached()
                     return true
                 } else if (isPullingUp) {
-                    // 再次上拉事件
+                    // Pull-up event again
                     scrollEventListener?.onBottomReached()
                     return true
                 }
@@ -94,11 +96,6 @@ class GestureNestedScrollView(context: Context, attrs: AttributeSet) : NestedScr
     fun isBottomReached(): Boolean {
         return isBottomReached && !isScrollingUp
     }
-
-    /*fun registerRecyclerView(recyclerView: CustomRecyclerView, eventListener: ScrollEventListener) {
-        this.recyclerView = recyclerView
-        this.recyclerView.scrollEventListener = eventListener
-    }*/
 
     fun registerRecyclerView(recyclerView: RecyclerView, eventListener: ScrollEventListener) {
         scrollEventListener = eventListener

@@ -1,6 +1,7 @@
 package com.series.aster.launcher
 
 import android.app.Application
+import android.view.WindowManager
 import dagger.hilt.android.HiltAndroidApp
 
 

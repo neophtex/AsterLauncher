@@ -1,9 +1,13 @@
 package com.series.aster.launcher.listener
 
 import android.content.Context
+import android.provider.SyncStateContract
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 internal open class OnSwipeTouchListener(c: Context?) : View.OnTouchListener {
     private var longPressOn = false
@@ -36,13 +40,6 @@ internal open class OnSwipeTouchListener(c: Context?) : View.OnTouchListener {
 
         override fun onLongPress(e: MotionEvent) {
             longPressOn = true
-            /*val scope = CoroutineScope(Dispatchers.Main)
-            scope.launch {
-                //delay(Constants.LONG_PRESS_DELAY_MS)
-                if (longPressOn) {
-                    onLongClick()
-                }
-            }*/
             onLongClick()
             super.onLongPress(e)
         }
@@ -78,8 +75,6 @@ internal open class OnSwipeTouchListener(c: Context?) : View.OnTouchListener {
     open fun onSwipeDown() {}
     open fun onLongClick() {}
     open fun onDoubleClick() {}
-    open fun onTripleClick() {}
-    private fun onClick() {}
 
     init {
         gestureDetector = GestureDetector(c, GestureListener())

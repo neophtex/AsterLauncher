@@ -19,7 +19,7 @@ import com.series.aster.launcher.databinding.FragmentHiddenBinding
 import com.series.aster.launcher.helper.AppHelper
 import com.series.aster.launcher.helper.FingerprintHelper
 import com.series.aster.launcher.listener.OnItemClickedListener
-import com.series.aster.launcher.ui.bottomsheetdialog.BottomSheetFragment
+import com.series.aster.launcher.ui.bottomsheetdialog.AppInfoBottomSheetFragment
 import com.series.aster.launcher.viewmodel.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -65,6 +65,7 @@ class HiddenFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        appHelper.dayNightMod(requireContext(), binding.hiddenView)
         super.onViewCreated(view, savedInstanceState)
 
         context = requireContext()
@@ -78,7 +79,6 @@ class HiddenFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
             adapter = hiddenAdapter
             layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
             setHasFixedSize(false)
-            //itemAnimator = null
         }
 
     }
@@ -86,10 +86,8 @@ class HiddenFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     private fun observeHiddenApps() {
         viewModel.compareInstalledAppInfo()
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.hiddenApps.collect { it
-                    // 处理收集到的数据
-
-                    hiddenAdapter.updateData(it)
+            viewModel.hiddenApps.collect {
+                hiddenAdapter.updateData(it)
                 }
         }
     }
@@ -103,7 +101,7 @@ class HiddenFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     }
 
     private fun showSelectedApp(appInfo: AppInfo) {
-        val bottomSheetFragment = BottomSheetFragment(appInfo)
+        val bottomSheetFragment = AppInfoBottomSheetFragment(appInfo)
         bottomSheetFragment.setOnBottomSheetDismissedListener(this)
         bottomSheetFragment.setOnAppStateClickListener(this)
         bottomSheetFragment.show(parentFragmentManager, "BottomSheetDialog")
@@ -151,12 +149,10 @@ class HiddenFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     override fun onAuthenticationFailed() {
         Toast.makeText(context, getString(R.string.authentication_failed), Toast.LENGTH_SHORT)
             .show()
-        // 可以执行其他操作
     }
 
     override fun onAuthenticationError(errorCode: Int, errorMessage: CharSequence?) {
         Toast.makeText(context, getString(R.string.authentication_error), Toast.LENGTH_SHORT)
             .show()
-        // 可以执行其他操作
     }
 }

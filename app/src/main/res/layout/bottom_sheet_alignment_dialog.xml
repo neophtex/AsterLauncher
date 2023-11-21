@@ -12,44 +12,48 @@
         android:background="@android:color/transparent"
         android:layout_margin="12dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             android:textSize="@dimen/text_super_large"
-            android:id="@+id/alignment_title">
+            android:id="@+id/alignment_title"
+            style="@style/TextDefaultStyle">
 
-        </TextView>
+        </androidx.appcompat.widget.AppCompatTextView>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             android:textSize="@dimen/text_large"
             android:text="@string/bottom_alignment_star"
-            android:id="@+id/alignment_star">
+            android:id="@+id/alignment_star"
+            style="@style/TextDefaultStyle">
 
-        </TextView>
+        </androidx.appcompat.widget.AppCompatTextView>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             android:textSize="@dimen/text_large"
             android:text="@string/bottom_alignment_center"
-            android:id="@+id/alignment_center">
+            android:id="@+id/alignment_center"
+            style="@style/TextDefaultStyle">
 
-        </TextView>
+        </androidx.appcompat.widget.AppCompatTextView>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             android:textSize="@dimen/text_large"
             android:text="@string/bottom_alignment_end"
-            android:id="@+id/alignment_end">
+            android:id="@+id/alignment_end"
+            style="@style/TextDefaultStyle">
 
-        </TextView>
+        </androidx.appcompat.widget.AppCompatTextView>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

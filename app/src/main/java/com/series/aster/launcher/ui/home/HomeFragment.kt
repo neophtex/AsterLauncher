@@ -26,7 +26,7 @@ import com.series.aster.launcher.listener.OnItemClickedListener
 import com.series.aster.launcher.listener.OnSwipeTouchListener
 import com.series.aster.launcher.listener.ScrollEventListener
 import com.series.aster.launcher.ui.activities.SettingsActivity
-import com.series.aster.launcher.ui.bottomsheetdialog.BottomSheetFragment
+import com.series.aster.launcher.ui.bottomsheetdialog.AppInfoBottomSheetFragment
 import com.series.aster.launcher.viewmodel.AppViewModel
 import com.series.aster.launcher.viewmodel.PreferenceViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -125,6 +125,13 @@ class HomeFragment() : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     }
 
     private fun setupRecyclerView() {
+
+        val marginTopInPixels = 128
+        val params: ViewGroup.MarginLayoutParams = binding.appListAdapter.layoutParams as ViewGroup.MarginLayoutParams
+        params.topMargin = marginTopInPixels
+        binding.appListAdapter.layoutParams = params
+
+
         binding.appListAdapter.apply {
             adapter = homeAdapter
             setHasFixedSize(false)
@@ -157,6 +164,7 @@ class HomeFragment() : Fragment(), OnItemClickedListener.OnAppsClickedListener,
             appHelper.updateUI(binding.clock,
                 preferenceHelper.homeTimeAlignment,
                 preferenceHelper.timeColor,
+                preferenceHelper.timeTextSize,
                 preferenceHelper.showTime
             )
         }
@@ -165,6 +173,7 @@ class HomeFragment() : Fragment(), OnItemClickedListener.OnAppsClickedListener,
             appHelper.updateUI(binding.date,
                 preferenceHelper.homeDateAlignment,
                 preferenceHelper.dateColor,
+                preferenceHelper.dateTextSize,
                 preferenceHelper.showDate
             )
         }
@@ -172,6 +181,7 @@ class HomeFragment() : Fragment(), OnItemClickedListener.OnAppsClickedListener,
             //binding.battery.setTextColor(preferenceHelper.batteryColor)
             appHelper.updateUI(binding.battery, Gravity.END,
                 preferenceHelper.batteryColor,
+                16.0f,
                 preferenceHelper.showBattery
             )
         }
@@ -191,7 +201,7 @@ class HomeFragment() : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     }
 
     private fun showSelectedApp(appInfo: AppInfo) {
-        val bottomSheetFragment = BottomSheetFragment(appInfo)
+        val bottomSheetFragment = AppInfoBottomSheetFragment(appInfo)
         bottomSheetFragment.setOnBottomSheetDismissedListener(this)
         bottomSheetFragment.setOnAppStateClickListener(this)
         bottomSheetFragment.show(parentFragmentManager, "BottomSheetDialog")
@@ -265,7 +275,6 @@ class HomeFragment() : Fragment(), OnItemClickedListener.OnAppsClickedListener,
 
     override fun onAuthenticationSucceeded(appInfo: AppInfo) {
         appHelper.launchApp(context, appInfo)
-        //utils.showToast(context, getString(R.string.authentication_succeeded))
     }
 
     override fun onAuthenticationFailed() {

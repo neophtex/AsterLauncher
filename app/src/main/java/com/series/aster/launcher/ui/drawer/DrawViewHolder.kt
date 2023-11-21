@@ -1,7 +1,13 @@
 package com.series.aster.launcher.ui.drawer
 
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Paint
+import android.graphics.Shader
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.series.aster.launcher.data.entities.AppInfo
 import com.series.aster.launcher.databinding.ItemDrawBinding
@@ -14,7 +20,6 @@ class DrawViewHolder(private val binding: ItemDrawBinding,
     fun bind(appInfo: AppInfo) {
         binding.apply {
             appDrawName.text = appInfo.appName
-            appDrawIcon.visibility = View.GONE
             Log.d("Tag", "Draw Adapter: ${appInfo.appName + appInfo.id}")
         }
 

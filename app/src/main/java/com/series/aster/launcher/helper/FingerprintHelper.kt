@@ -3,9 +3,11 @@ package com.series.aster.launcher.helper
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.fragment.app.Fragment
 import com.series.aster.launcher.R
 import com.series.aster.launcher.data.entities.AppInfo
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class FingerprintHelper @Inject constructor(private val fragment: Fragment) {

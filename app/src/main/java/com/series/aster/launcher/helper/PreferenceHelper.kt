@@ -81,6 +81,18 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
         get() = prefs.getInt(Constants.HOME_DAILY_WORD_ALIGNMENT, Gravity.START)
         set(value) = prefs.edit().putInt(Constants.HOME_DAILY_WORD_ALIGNMENT,value).apply()
 
+    var dateTextSize: Float
+        get() = prefs.getFloat(Constants.DATE_TEXT_SIZE, 32f)
+        set(value) = prefs.edit().putFloat(Constants.DATE_TEXT_SIZE, value).apply()
+
+    var timeTextSize: Float
+        get() = prefs.getFloat(Constants.TIME_TEXT_SIZE, 48f)
+        set(value) = prefs.edit().putFloat(Constants.TIME_TEXT_SIZE, value).apply()
+
+    var appTextSize: Float
+        get() = prefs.getFloat(Constants.APP_TEXT_SIZE, 24f)
+        set(value) = prefs.edit().putFloat(Constants.APP_TEXT_SIZE, value).apply()
+
     var tapLockScreen: Boolean
         get() = prefs.getBoolean(Constants.DOUBLE_TAP_LOCK, false)
         set(value) = prefs.edit().putBoolean(Constants.DOUBLE_TAP_LOCK, value).apply()

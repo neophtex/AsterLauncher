@@ -21,6 +21,7 @@
             android:id="@+id/action_HomeFragment_to_FavoriteFragment"
             app:destination="@id/FavoriteFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/DrawFragment"
         android:name="com.series.aster.launcher.ui.drawer.DrawFragment"

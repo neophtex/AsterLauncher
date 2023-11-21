@@ -9,10 +9,4 @@ import com.series.aster.launcher.data.entities.AppInfo
 @Database(entities = [AppInfo::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appDao(): AppInfoDAO
-
-    override fun close() {
-        if (isOpen) {
-            super.close()
-        }
-    }
 }

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginVertical="32dp"
+    android:id="@+id/favorite_view"
     tools:context=".ui.favorite.FavoriteFragment">
 
         <FrameLayout
@@ -14,10 +14,11 @@
             android:clickable="true"
             android:focusable="true"
             android:layout_height="match_parent"
+            android:layout_marginVertical="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/topTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +27,8 @@
             android:textSize="@dimen/text_super_large"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/TextDefaultStyle"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favoriteAdapter"

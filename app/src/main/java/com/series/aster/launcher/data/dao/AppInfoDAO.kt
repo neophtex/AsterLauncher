@@ -10,10 +10,13 @@ import kotlinx.coroutines.flow.Flow
 interface AppInfoDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(app: AppInfo)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(apps: List<AppInfo>)
+
     @Update
     suspend fun update(app: AppInfo)
+
     @Delete
     suspend fun delete(app: AppInfo)
 

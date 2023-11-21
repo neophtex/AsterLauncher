@@ -6,19 +6,27 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
 import android.net.Uri
 import android.os.Build
 import android.provider.AlarmClock
 import android.provider.CalendarContract
+import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowInsets
+import android.view.accessibility.AccessibilityManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.LinearLayoutCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.series.aster.launcher.Constants
 import com.series.aster.launcher.R
@@ -27,9 +35,10 @@ import com.series.aster.launcher.data.entities.AppInfo
 import com.series.aster.launcher.ui.activities.LauncherActivity
 import javax.inject.Inject
 
-class AppHelper @Inject constructor(){
+class AppHelper @Inject constructor() {
 
     fun resetDefaultLauncher(context: Context) {
+        //default launcher setting
         try {
             val packageManager = context.packageManager
             val componentName = ComponentName(context, LauncherActivity::class.java)
@@ -53,6 +62,7 @@ class AppHelper @Inject constructor(){
 
     @SuppressLint("WrongConstant", "PrivateApi")
     fun expandNotificationDrawer(context: Context) {
+        // expand notification
         try {
             val statusBarService = context.getSystemService(Constants.NOTIFICATION_SERVICE)
             val statusBarManager = Class.forName(Constants.NOTIFICATION_MANAGER)
@@ -63,37 +73,43 @@ class AppHelper @Inject constructor(){
         }
     }
 
-    fun searchView(context: Context){
+    fun searchView(context: Context) {
+        // search result
         val intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY, "")
         context.startActivity(intent)
     }
 
-    fun updateUI(view: View, gravity: Int, selectColor: Int, isVisible: Boolean) {
-        val layoutParams = view.layoutParams as LinearLayout.LayoutParams
+    fun dayNightMod(context: Context, view: View) {
+        when (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                // dark mod
+                view.setBackgroundColor(context.resources.getColor(R.color.whiteTrans25))
+            }
+
+            Configuration.UI_MODE_NIGHT_NO -> {
+                // light mod
+                view.setBackgroundColor(context.resources.getColor(R.color.blackTrans50))
+            }
+        }
+    }
+
+    fun updateUI(view: View, gravity: Int, selectColor: Int, textSize: Float, isVisible: Boolean) {
+        //textview style
+        val layoutParams = view.layoutParams as LinearLayoutCompat.LayoutParams
         layoutParams.gravity = gravity
         view.layoutParams = layoutParams
 
         if (view is TextView) {
             view.setTextColor(selectColor)
+            view.textSize = textSize
             view.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
-            view.isClickable = if(isVisible) view.isClickable else !view.isClickable
+            view.isClickable = if (isVisible) view.isClickable else !view.isClickable
         }
-
-        /*val paint = (view as TextView).paint
-        val width = paint.measureText(view.text.toString())
-        val textShader: Shader = LinearGradient(
-            0f, 0f, width, view.textSize, intArrayOf(
-                selectColor,
-                Color.WHITE,
-            ), null, Shader.TileMode.MIRROR
-        )
-
-
-        view.paint.shader = textShader*/
     }
 
     fun launchApp(context: Context, appInfo: AppInfo) {
+        // launch application
         val intent = context.packageManager.getLaunchIntentForPackage(appInfo.packageName)
         if (intent != null) {
             context.startActivity(intent)
@@ -101,7 +117,9 @@ class AppHelper @Inject constructor(){
             showToast(context, "Failed to open the application")
         }
     }
+
     fun launchClock(context: Context) {
+        // launch clock
         try {
             val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
             context.startActivity(intent)
@@ -110,7 +128,8 @@ class AppHelper @Inject constructor(){
         }
     }
 
-    fun launchCalendar(context: Context){
+    fun launchCalendar(context: Context) {
+        // launch clock
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = CalendarContract.CONTENT_URI
         try {
@@ -127,19 +146,22 @@ class AppHelper @Inject constructor(){
         }
     }
 
-    fun unInstallApp(context: Context, appInfo: AppInfo){
+    fun unInstallApp(context: Context, appInfo: AppInfo) {
+        //uninstall application
         val intent = Intent(Intent.ACTION_DELETE)
         intent.data = Uri.parse("package:${appInfo.packageName}")
         context.startActivity(intent)
     }
 
-    fun appInfo(context: Context, appInfo: AppInfo){
+    fun appInfo(context: Context, appInfo: AppInfo) {
+        //open app info
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         intent.data = Uri.fromParts("package", appInfo.packageName, null)
         context.startActivity(intent)
     }
 
     fun gravityToString(gravity: Int): String? {
+        //ui gravity setting
         return when (gravity) {
             Gravity.CENTER -> "CENTER"
             Gravity.START -> "LEFT"
@@ -151,6 +173,7 @@ class AppHelper @Inject constructor(){
     }
 
     fun getGravityFromSelectedItem(selectedItem: String): Int {
+        //gravity option
         return when (selectedItem) {
             "Left" -> Gravity.START
             "Center" -> Gravity.CENTER
@@ -160,16 +183,20 @@ class AppHelper @Inject constructor(){
     }
 
 
-    fun showToast(context: Context,message: String) {
+    fun showToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     fun showStatusBar(window: Window) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+        //show statusBar
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.show(WindowInsets.Type.statusBars())
         } else
             @Suppress("DEPRECATION", "InlinedApi")
-            window.decorView.apply { systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN }
+            window.decorView.apply {
+                systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            }
     }
 
     fun hideStatusBar(window: Window) {
@@ -177,21 +204,67 @@ class AppHelper @Inject constructor(){
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         else {
             @Suppress("DEPRECATION")
-            window.decorView.apply { systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN }
+            window.decorView.apply {
+                systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN
+            }
         }
     }
 
-    fun enableAppAsAccessibilityService(context: Context, accessibilityState: Boolean) {
+    fun showSoftKeyboard(context: Context, view: View) {
+        if (view.requestFocus()) {
+            val inputMethodManager: InputMethodManager =
+                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
 
+    fun hideKeyboard(context: Context, view: View) {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(this.windowToken, 0)
+    }
+
+    fun rateApp(context: Context){
+        val uri = Uri.parse("market://details?id=" + context.packageName)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        context.startActivity(intent)
+    }
+
+    fun shareApp(context: Context){
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "share application")
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + context.packageName)
+        context.startActivity(Intent.createChooser(shareIntent, "share application"))
+    }
+
+    fun github(context: Context){
+        val uri = Uri.parse("https://github.com/neophtex/AsterLauncher")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        context.startActivity(intent)
+    }
+
+    fun feedback(context: Context){
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        emailIntent.data = Uri.parse("mailto:neophtex@gmail.com")
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Aster Launcher")
+        context.startActivity(Intent.createChooser(emailIntent, "Choose Mail Application"))
+    }
+    fun enableAppAsAccessibilityService(context: Context, accessibilityState: Boolean) {
+        //lock screen permissions
         val myAccessibilityService = MyAccessibilityService.instance()
 
-        val state: String = if(myAccessibilityService != null){
+        val state: String = if (myAccessibilityService != null) {
             context.getString(R.string.accessibility_settings_disable)
-        }else{
+        } else {
             context.getString(R.string.accessibility_settings_enable)
         }
 
-        val builder = MaterialAlertDialogBuilder(context, R.style.CustomDialogTheme)
+        val builder = MaterialAlertDialogBuilder(context)
 
         builder.setTitle(R.string.accessibility_settings_title)
         builder.setMessage(R.string.accessibility_service_desc)
@@ -202,17 +275,4 @@ class AppHelper @Inject constructor(){
             .setNegativeButton(android.R.string.cancel) { dialog, _ -> dialog.dismiss() }
             .show()
     }
-
-    /*fun isAccessServiceEnabled(context: Context): Boolean {
-        val am = context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
-        val enabledServices = Settings.Secure.getString(
-            context.contentResolver,
-            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-        )
-        val serviceClassName = MyAccessibilityService::class.java.name // Replace to your full packageName
-        val packageName = Constants.PACKAGE_NAME
-        return enabledServices?.contains("$packageName/$serviceClassName") == true &&
-                am.isEnabled && am.isTouchExplorationEnabled
-    }*/
-
 }

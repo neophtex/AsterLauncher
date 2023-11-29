@@ -1,0 +1,1 @@
+* New feature - Add custom text size and swipe option

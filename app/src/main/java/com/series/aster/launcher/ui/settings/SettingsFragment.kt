@@ -82,6 +82,8 @@ class SettingsFragment : Fragment(), ScrollEventListener {
         binding.dateSwitchCompat.isChecked = preferenceHelper.showDate
         binding.batterySwitchCompat.isChecked = preferenceHelper.showBattery
         binding.gesturesLockSwitchCompat1.isChecked = preferenceHelper.tapLockScreen
+        binding.gesturesNotificationSwitchCompat1.isChecked = preferenceHelper.swipeNotification
+        binding.gesturesSearchSwitchCompat1.isChecked = preferenceHelper.swipeSearch
     }
 
     private fun observeClickListener() {
@@ -156,6 +158,12 @@ class SettingsFragment : Fragment(), ScrollEventListener {
         binding.gesturesLockSwitchCompat1.setOnCheckedChangeListener { _, isChecked ->
             appHelper.enableAppAsAccessibilityService(requireContext(), preferenceHelper.tapLockScreen)
             preferenceViewModel.setDoubleTapLock(isChecked)
+        }
+        binding.gesturesNotificationSwitchCompat1.setOnCheckedChangeListener { _, isChecked ->
+            preferenceViewModel.setSwipeNotification(isChecked)
+        }
+        binding.gesturesSearchSwitchCompat1.setOnCheckedChangeListener { _, isChecked ->
+            preferenceViewModel.setSwipeSearch(isChecked)
         }
     }
 

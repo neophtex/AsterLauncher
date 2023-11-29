@@ -36,6 +36,8 @@ class PreferenceViewModel @Inject constructor(
 
 
     val tapLockScreenLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val swipeNotificationLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val swipeSearchLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     fun setFirstLaunch(firstLaunch: Boolean) {
         preferenceHelper.firstLaunch = firstLaunch
@@ -125,5 +127,15 @@ class PreferenceViewModel @Inject constructor(
     fun setDoubleTapLock(tapLockScreen: Boolean){
         preferenceHelper.tapLockScreen = tapLockScreen
         tapLockScreenLiveData.postValue((preferenceHelper.tapLockScreen))
+    }
+
+    fun setSwipeNotification(swipeNotification: Boolean){
+        preferenceHelper.swipeNotification = swipeNotification
+        swipeNotificationLiveData.postValue((preferenceHelper.swipeNotification))
+    }
+
+    fun setSwipeSearch(swipeSearch: Boolean){
+        preferenceHelper.swipeSearch = swipeSearch
+        swipeSearchLiveData.postValue((preferenceHelper.swipeSearch))
     }
 }

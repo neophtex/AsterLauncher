@@ -16,6 +16,9 @@
 [<img src="https://img.shields.io/badge/License-GPLv3-blue.svg"
       alt="Licenses"
       height="22"/>](https://www.gnu.org/licenses/gpl-3.0)
+[<img src="https://img.shields.io/github/downloads/neophtex/AsterLauncher/total?color=red"
+      alt="Download from GitHub"
+      height="22"/>](https://github.com/neophtex/AsterLauncher/releases)
       
 **Features**
 ------------

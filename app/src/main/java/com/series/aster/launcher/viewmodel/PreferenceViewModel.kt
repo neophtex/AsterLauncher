@@ -39,6 +39,8 @@ class PreferenceViewModel @Inject constructor(
     val swipeNotificationLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val swipeSearchLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
+    val darkThemesLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
     fun setFirstLaunch(firstLaunch: Boolean) {
         preferenceHelper.firstLaunch = firstLaunch
         firstLaunchLiveData.postValue(preferenceHelper.firstLaunch)
@@ -137,5 +139,10 @@ class PreferenceViewModel @Inject constructor(
     fun setSwipeSearch(swipeSearch: Boolean){
         preferenceHelper.swipeSearch = swipeSearch
         swipeSearchLiveData.postValue((preferenceHelper.swipeSearch))
+    }
+
+    fun setDarkThemes(darkThemes: Boolean){
+        preferenceHelper.darkThemes = darkThemes
+        darkThemesLiveData.postValue((preferenceHelper.darkThemes))
     }
 }

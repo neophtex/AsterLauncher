@@ -26,6 +26,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.series.aster.launcher.Constants
@@ -78,6 +79,14 @@ class AppHelper @Inject constructor() {
         val intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY, "")
         context.startActivity(intent)
+    }
+
+    fun darkThemes(darkThemes: Boolean){
+        if (darkThemes){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     fun dayNightMod(context: Context, view: View) {

@@ -69,7 +69,7 @@ class DrawFragment : Fragment(), OnItemClickedListener.OnAppsClickedListener,
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Set according to the system theme mode
-        appHelper.dayNightMod(requireContext(), binding.drawBackground)
+        //appHelper.dayNightMod(requireContext(), binding.drawBackground)
         super.onViewCreated(view, savedInstanceState)
 
         context = requireContext()

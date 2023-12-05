@@ -3,6 +3,7 @@ package com.series.aster.launcher.helper
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.Gravity
+import androidx.appcompat.app.AppCompatDelegate
 import com.series.aster.launcher.Constants
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -104,4 +105,8 @@ class PreferenceHelper @Inject constructor(@ApplicationContext context: Context)
     var swipeSearch: Boolean
         get() = prefs.getBoolean(Constants.SWIPE_UP_SEARCH, false)
         set(value) = prefs.edit().putBoolean(Constants.SWIPE_UP_SEARCH, value).apply()
+
+    var darkThemes: Boolean
+        get() = prefs.getBoolean(Constants.DARK_THEMES, true)
+        set(value) = prefs.edit().putBoolean(Constants.DARK_THEMES, value).apply()
 }

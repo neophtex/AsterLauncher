@@ -13,6 +13,7 @@ object Constants {
     const val DOUBLE_TAP_LOCK = "DOUBLE_TAP_LOCK"
     const val SWIPE_DOWN_NOTIFICATION = "SWIPE_DOWN_NOTIFICATION"
     const val SWIPE_UP_SEARCH = "SWIPE_UP_SEARCH"
+    const val DARK_THEMES = "DARK_THEMES"
 
     const val DATE_COLOR = "DATE_COLOR"
     const val TIME_COLOR = "TIME_COLOR"

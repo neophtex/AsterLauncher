@@ -187,6 +187,38 @@
                         android:scaleX="0.7"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/themes_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left|center"
+                        android:text="@string/settings_appearance_themes"
+                        android:textSize="@dimen/text_large"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlHardcoded"
+                        style="@style/TextDefaultStyle"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/darkThemes_switchCompat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:thumb="@drawable/shape_switch_thumb"
+                        app:track="@drawable/selector_switch"
+                        android:scaleY="0.8"
+                        android:scaleX="0.7"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -387,7 +419,7 @@
                         style="@style/TextDefaultStyle"/>
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/gestures_lock_switchCompat1"
+                        android:id="@+id/gestures_lock_switchCompat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:thumb="@drawable/shape_switch_thumb"
@@ -418,7 +450,7 @@
                         style="@style/TextDefaultStyle"/>
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/gestures_notification_switchCompat1"
+                        android:id="@+id/gestures_notification_switchCompat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:thumb="@drawable/shape_switch_thumb"
@@ -449,7 +481,7 @@
                         style="@style/TextDefaultStyle"/>
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/gestures_search_switchCompat1"
+                        android:id="@+id/gestures_search_switchCompat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:thumb="@drawable/shape_switch_thumb"

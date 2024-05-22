@@ -7,27 +7,22 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.graphics.Color
-import android.graphics.LinearGradient
-import android.graphics.Shader
 import android.net.Uri
 import android.os.Build
 import android.provider.AlarmClock
 import android.provider.CalendarContract
-import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowInsets
-import android.view.accessibility.AccessibilityManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.series.aster.launcher.Constants
 import com.series.aster.launcher.R
@@ -36,29 +31,11 @@ import com.series.aster.launcher.data.entities.AppInfo
 import com.series.aster.launcher.ui.activities.LauncherActivity
 import javax.inject.Inject
 
+
 class AppHelper @Inject constructor() {
 
     fun resetDefaultLauncher(context: Context) {
-        //default launcher setting
-        try {
-            val packageManager = context.packageManager
-            val componentName = ComponentName(context, LauncherActivity::class.java)
-            packageManager.setComponentEnabledSetting(
-                componentName,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP
-            )
-            val launcherPicker = Intent(Intent.ACTION_MAIN)
-            launcherPicker.addCategory(Intent.CATEGORY_HOME)
-            context.startActivity(launcherPicker)
-            packageManager.setComponentEnabledSetting(
-                componentName,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP
-            )
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        context.startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
     }
 
     @SuppressLint("WrongConstant", "PrivateApi")

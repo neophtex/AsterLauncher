@@ -16,8 +16,8 @@ android {
         applicationId "com.series.aster.launcher"
         minSdk 24
         targetSdk 34
-        versionCode 12
-        versionName "1.0.7"
+        versionCode 14
+        versionName "1.0.8.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -70,7 +70,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //room
-    def room_version = "2.6.0"
+    def room_version = "2.6.1"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

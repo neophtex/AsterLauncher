@@ -29,3 +29,15 @@
 - **App Locking: Secure your privacy and data by fingerprint to lock selected apps.**
 
 - **Personalized Customization: Choose the font color and position for time, date, and favorite apps, making your home screen truly reflect your style.**
+
+**License**
+------------
+This project is licensed under the GPL 3 License - see the [LICENSE](LICENSE) file for details.
+
+**Copyright Notice**
+------------
+© 2024 neophtex. All rights reserved.
+
+This project, Aster Launcher, is the original work of neophtex. The project is licensed under the GPL 3 License. You are free to use, modify, and distribute this project under the terms of the GPL 3 License. However, you must retain this copyright notice and give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+Original Project: Aster Launcher

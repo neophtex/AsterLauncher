@@ -142,16 +142,13 @@ class SettingsFragment : Fragment(), ScrollEventListener {
 
         binding.timeSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
             preferenceViewModel.setShowTime(isChecked)
-            //transition()
         }
 
         binding.dateSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
             preferenceViewModel.setShowDate(isChecked)
-            //transition()
         }
         binding.batterySwitchCompat.setOnCheckedChangeListener { _, isChecked ->
             preferenceViewModel.setShowBattery(isChecked)
-            //transition()
         }
         binding.gesturesLockSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
             appHelper.enableAppAsAccessibilityService(
@@ -159,15 +156,12 @@ class SettingsFragment : Fragment(), ScrollEventListener {
                 preferenceHelper.tapLockScreen
             )
             preferenceViewModel.setDoubleTapLock(isChecked)
-            //transition()
         }
         binding.gesturesNotificationSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
             preferenceViewModel.setSwipeNotification(isChecked)
-            //transition()
         }
         binding.gesturesSearchSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
             preferenceViewModel.setSwipeSearch(isChecked)
-            //transition()
         }
         binding.darkThemesSwitchCompat.setOnCheckedChangeListener { _, isChecked ->
             preferenceViewModel.setDarkThemes(isChecked)

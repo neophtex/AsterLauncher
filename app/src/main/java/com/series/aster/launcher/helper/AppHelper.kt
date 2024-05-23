@@ -173,6 +173,7 @@ class AppHelper @Inject constructor() {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
+    // https://github.com/DroidWorksStudio/mLauncher/blob/34454baae46e0ca91d57545f6c8d29f6b3ec7f5e/app/src/main/java/com/github/droidworksstudio/mlauncher/helper/Utils.kt#L367
     fun showStatusBar(window: Window) {
         //show statusBar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -185,6 +186,7 @@ class AppHelper @Inject constructor() {
             }
     }
 
+    // https://github.com/DroidWorksStudio/mLauncher/blob/34454baae46e0ca91d57545f6c8d29f6b3ec7f5e/app/src/main/java/com/github/droidworksstudio/mlauncher/helper/Utils.kt#L378
     fun hideStatusBar(window: Window) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
             window.insetsController?.hide(WindowInsets.Type.statusBars())
@@ -208,7 +210,8 @@ class AppHelper @Inject constructor() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
+    
+    // https://github.com/DroidWorksStudio/mLauncher/blob/34454baae46e0ca91d57545f6c8d29f6b3ec7f5e/app/src/main/java/com/github/droidworksstudio/mlauncher/helper/Extensions.kt#L15
     fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(this.windowToken, 0)

@@ -9,6 +9,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/*
+ * This function is based on the solution provided in the following tutorial:
+ * "How to handle swipe gestures in Kotlin?"
+ * Tutorial URL: https://www.tutorialspoint.com/how-to-handle-swipe-gestures-in-kotlin
+ *
+ * The original code has been modified to fit the specific requirements of this project.
+ */
 internal open class OnSwipeTouchListener(c: Context?) : View.OnTouchListener {
     private var longPressOn = false
 

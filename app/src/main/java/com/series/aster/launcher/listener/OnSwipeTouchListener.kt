@@ -1,13 +1,10 @@
 package com.series.aster.launcher.listener
 
 import android.content.Context
-import android.provider.SyncStateContract
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+
 
 /*
  * This function is based on the solution provided in the following tutorial:
